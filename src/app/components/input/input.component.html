@@ -1,0 +1,28 @@
+<div [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>{{ fieldConfig.title }}</mat-label>
+    <input
+      matInput
+      [formControlName]="fieldName"
+      [type]="fieldConfig?.widget.type || 'text'"
+      [placeholder]="fieldConfig?.placeholder || ''"
+    />
+    <!-- Angular Material built-in error handling with icons -->
+    <mat-error *ngIf="form.get(fieldName)?.hasError('required')">
+      <mat-icon class="error-icon" aria-hidden="true">error</mat-icon>
+      {{ fieldConfig.title }} je vyžadováno.
+    </mat-error>
+    <mat-error *ngIf="form.get(fieldName)?.hasError('pattern')">
+      <mat-icon class="error-icon" aria-hidden="true">warning</mat-icon>
+      Neplatný formát.
+    </mat-error>
+    <mat-error *ngIf="form.get(fieldName)?.hasError('minlength')">
+      <mat-icon class="error-icon" aria-hidden="true">error_outline</mat-icon>
+      Minimální délka není dodržena.
+    </mat-error>
+    <mat-error *ngIf="form.get(fieldName)?.hasError('maxlength')">
+      <mat-icon class="error-icon" aria-hidden="true">error_outline</mat-icon>
+      Maximální délka je překročena.
+    </mat-error>
+  </mat-form-field>
+</div>

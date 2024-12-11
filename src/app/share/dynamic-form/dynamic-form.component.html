@@ -1,0 +1,67 @@
+<form
+  *ngIf="schema && form"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="form-container"
+>
+  <!-- Iterate through each layout in schema.layout array -->
+  <ng-container *ngFor="let layout of schema?.layout">
+    <mat-card class="card-container">
+      <mat-card-content *ngIf="layout.items && layout.items.length > 0">
+        <!-- Iterate through each item in layout.items -->
+        <ng-container *ngFor="let item of layout.items">
+          <!-- Check if item is an object with config or just an item name (string) -->
+          <ng-container *ngIf="item?.config?.columns; else simpleItems">
+            <!-- Use Flex classes for layout -->
+            <div class="columns-container">
+              <!-- Iterate through each column in item.config.columns -->
+              <ng-container *ngFor="let column of item.config.columns">
+                <div
+                  class="column"
+                  [ngStyle]="{ 'flex-basis': column.width + '%' }"
+                >
+                  <!-- Iterate through indexes in column.content -->
+                  <ng-container *ngFor="let index of column.content">
+                    <app-dynamic-field
+                      [form]="form"
+                      [name]="item.items[index]"
+                      [config]="schema.properties[item.items[index]]"
+                      class="field-container"
+                    ></app-dynamic-field>
+                  </ng-container>
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+
+          <!-- Handle simple items if item.config is not present -->
+          <ng-template #simpleItems>
+            <div class="columns-container">
+              <div class="column">
+                <ng-container *ngFor="let fieldName of item.items">
+                  <app-dynamic-field
+                    [form]="form"
+                    [name]="fieldName"
+                    [config]="schema.properties[fieldName]"
+                    class="field-container"
+                  ></app-dynamic-field>
+                </ng-container>
+              </div>
+            </div>
+          </ng-template>
+        </ng-container>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+
+  <div class="flex-center">
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="submit-button"
+    >
+      Submit
+    </button>
+  </div>
+</form>

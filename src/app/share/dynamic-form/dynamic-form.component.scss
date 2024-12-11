@@ -1,0 +1,33 @@
+:host {
+  mat-card {
+    margin: 16px;
+    margin-bottom: 20px;
+    padding: 16px; /* Ensure there is padding inside cards */
+    display: flex;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  .flex-center {
+    display: flex;
+    align-items: center; /* Centers items vertically */
+    justify-content: center; /* Centers items horizontally */
+
+    button {
+      margin-bottom: 16px;
+    }
+  }
+
+  .columns-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px; /* Adjusts space between columns */
+  }
+
+  .column {
+    flex: 1 1 50%; /* Each column takes up to 50% of the container's width */
+    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+  }
+}

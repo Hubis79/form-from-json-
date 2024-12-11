@@ -1,0 +1,10 @@
+<ng-template #loading>
+  <div class="loader-container">
+    <div class="loader"></div>
+  </div>
+</ng-template>
+
+<app-dynamic-form
+  *ngIf="schema; else loading"
+  [schema]="schema"
+></app-dynamic-form>

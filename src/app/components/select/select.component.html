@@ -1,0 +1,12 @@
+<div [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>{{ fieldConfig.title }}</mat-label>
+    <mat-select [formControlName]="fieldName">
+      <mat-option
+        *ngFor="let item of fieldConfig.oneOf"
+        value="{{ item.const }}"
+        >{{ item.title }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+</div>

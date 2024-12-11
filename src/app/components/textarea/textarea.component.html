@@ -1,0 +1,11 @@
+<div [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>{{ fieldConfig.title }}</mat-label>
+    <textarea
+      matInput
+      [formControlName]="fieldName"
+      [placeholder]="fieldConfig?.placeholder"
+    >
+    </textarea>
+  </mat-form-field>
+</div>
